@@ -1,0 +1,40 @@
+def prim(graph, n):
+    selected = [False] * n
+    selected[0] = True
+
+    total = 0
+
+    print("\nEdge \tWeight")
+
+    for _ in range(n - 1):
+        minimum = float('inf')
+        x = y = 0
+
+        for i in range(n):
+            if selected[i]:
+                for j in range(n):
+                    if not selected[j] and graph[i][j] != 0:
+                        if graph[i][j] < minimum:
+                            minimum = graph[i][j]
+                            x = i
+                            y = j
+
+        print(x, "-", y, "\t", graph[x][y])
+        total += graph[x][y]
+        selected[y] = True
+
+    print("Minimum Cost =", total)
+
+
+# Taking input from user
+n = int(input("Enter number of vertices: "))
+
+graph = []
+
+print("Enter the adjacency matrix:")
+
+for i in range(n):
+    row = list(map(int, input().split()))
+    graph.append(row)
+
+prim(graph, n)
